@@ -2,10 +2,11 @@ import UsersMongo from "../daos/mongodb/usersDao.js"
 const usersMongo = new UsersMongo()
 import passport from "passport"
 import { Strategy as GithubStrategy } from "passport-github2"
+import 'dotenv/config'
 
 const strategyOptions = {
-    clientID: "Iv1.c73297e18d3524ca",
-    clientSecret: "601b07ebc3ad5240fa44d46a66142176a5ab716b ",
+    clientID: process.env.GITHUB_CLIENTID,
+    clientSecret: process.env.GITHUB_CLIENTSECRET,
     callbackURL: "http://localhost:8080/mongo/products"
 }
 

@@ -1,6 +1,7 @@
 import { UserModel } from "./models/usersModel.js"
 import { hashPass, validPassword } from "../../utils.js"
 import MongoDao from "./mongoDao.js"
+import 'dotenv/config'
 
 
 export default class UsersMongo extends MongoDao {
@@ -19,7 +20,7 @@ export default class UsersMongo extends MongoDao {
     async register(user) {
         try {
             const { email, password } = user
-            if (email === 'adminCoder@coder.com' && password === 'adminCod3r123') {
+            if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
                 return await UserModel.create({...user, password: hashPass(password), role: 'admin'})
             }
             const userExists = await this.findByEmail(email)

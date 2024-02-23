@@ -52,13 +52,13 @@ socketServer.on('connection', async(socket) => {
 
 const mongoStoreOptions = {
     store: MongoStore.create({
-      mongoUrl: 'mongodb://127.0.0.1:27017/segundaEntrega',
+      mongoUrl: process.env.MONGOOSEURL,
       ttl: 180,
       crypto: {
-        secret: '1234'
+        secret: process.env.MONGO_STORE_SECRET
       }
     }),
-    secret: "1234",
+    secret: process.env.MONGO_STORE_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {

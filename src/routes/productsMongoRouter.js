@@ -1,5 +1,6 @@
 import { Router } from "express"
 import ProductController from "../controller/productsController.js"
+import { checkUserRole } from "../middlewares/userVerification.js"
 const controller = new ProductController()
 
 const routerMongo = Router()
@@ -8,10 +9,10 @@ routerMongo.get('/', controller.getProducts)
 
 routerMongo.get('/:pid', controller.findById)
 
-routerMongo.put('/:pid', controller.updateProduct)
+routerMongo.put('/:pid', checkUserRole('admin'), controller.updateProduct)
 
-routerMongo.delete('/:pid', controller.delete)
+routerMongo.delete('/:pid', checkUserRole('admin'), controller.delete)
 
-routerMongo.post('/', controller.create)
+routerMongo.post('/', checkUserRole('admin'), controller.create)
 
 export default routerMongo

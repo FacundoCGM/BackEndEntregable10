@@ -47,3 +47,4 @@ passport.deserializeUser(async (id, done) => {
     console.log('deserialize', user)
     return done(null, user)
 })
+

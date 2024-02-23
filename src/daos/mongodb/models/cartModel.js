@@ -1,10 +1,10 @@
-import { Schema, model } from "mongoose"
+import mongoose from "mongoose"
 
-const cartSchema = new Schema({
+const cartSchema = new mongoose.Schema({
   products: [
     {
       product: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'products',
       },
       quantity: { type: Number, default: 1 }
@@ -12,10 +12,10 @@ const cartSchema = new Schema({
   ]
 })
 
-cartSchema.pre('find', function () {
+cartSchema.pre('findOne', function () {
   this.populate('products.product')
 })
 
-export const CartModel = model(
+export const CartModel = mongoose.model(
     'carts',
     cartSchema)

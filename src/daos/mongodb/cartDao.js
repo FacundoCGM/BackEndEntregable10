@@ -108,5 +108,14 @@ export default class CartMongo {
             console.error(error)
         }
     }
+
+    async findOne(id) {
+        try {
+            const cart = await CartModel.findOne({id})
+            return cart
+        } catch (error) {
+            console.error(error)
+        }
+    }
 }
 
